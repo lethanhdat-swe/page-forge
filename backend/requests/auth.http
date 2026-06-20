@@ -1,0 +1,78 @@
+@baseUrl = http://localhost:8000/api
+@authToken = mock-token-12345
+
+### Request 1: Đăng ký tài khoản (POST)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "email": "lethanhdat1567@gmail.com",
+    "password": "123123"
+}
+
+
+### Request 2: Xác thực email (POST)
+POST {{baseUrl}}/auth/verify
+Content-Type: application/json
+
+{
+    "token": "b505cff5425f7db69552284612d5a2d7aef5f14e9124e8e7496d0c55982f1d26"
+}
+
+
+### Request 3: Đăng nhập (POST)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "lethanhdat1567@gmail.com",
+    "password": "newsecurepassword123"
+}
+
+
+### Request 4: Đăng nhập bằng Google (POST)
+POST {{baseUrl}}/auth/google
+Content-Type: application/json
+
+{
+    "idToken": "firebase-id-token-here"
+}
+
+
+### Request 5: Yêu cầu đặt lại mật khẩu (POST)
+POST {{baseUrl}}/auth/forgot-password
+Content-Type: application/json
+
+{
+    "email": "lethanhdat1567@gmail.com"
+}
+
+
+### Request 6: Đặt lại mật khẩu mới (POST)
+POST {{baseUrl}}/auth/reset-password
+Content-Type: application/json
+
+{
+    "token": "ca44b66910249a108ee38aecf8e59ed67d737e812abdf59db3709867bc41671e",
+    "newPassword": "newsecurepassword123"
+}
+
+
+### Request 7: Làm mới token (POST)
+POST {{baseUrl}}/auth/refresh-token
+Content-Type: application/json
+
+{
+    "refreshToken": "aca09305ff9f58ca39daa6700e06daef9cc753260ee4c6b3230d08476d92304333e54e9285b8b13f"
+}
+
+
+### Request 8: Đăng xuất (POST)
+POST {{baseUrl}}/auth/logout
+Content-Type: application/json
+
+{
+    "refreshToken": "37d14f16f73de8294ee8d6939d03ef186ec85721a9996ddd70c6a05799fe3ef2f9ec5a3cc76a6a02"
+}
+

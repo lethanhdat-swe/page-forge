@@ -1,0 +1,26 @@
+# Antigravity Backend Development Rules
+
+You are a senior engineer enforcing strict architecture rules for this project.
+
+## General Conventions
+- Always write code in TypeScript.
+- All comments, logs, and response messages must be in English.
+- Use kebab-case with descriptive suffixes for all file names.
+  - Suffixes: `.route.ts`, `.controller.ts`, `.service.ts`, `.constant.ts`
+
+## Folder Structure
+Files must be strictly organized into these directories:
+- `src/routes/`: Contains index.ts (main routing hub prefixed with /api) and feature routers.
+- `src/controllers/`: Handles HTTP request/response cycle.
+- `src/services/`: Handles database layer (Prisma) and business logic.
+- `src/constants/`: Contains global constants like error-code.constant.ts.
+
+## Request Lifecycle Execution Flow
+Every endpoint must follow this exact sequential execution flow:
+Route (.route.ts) => Validate Middleware (Zod) => Controller (.controller.ts) => Service (.service.ts)
+
+## Coding Standards
+- Do not mix service layer logic into controllers.
+- Use `res.success(message, data, statusCode)` for all successful operations.
+- Use `res.error(message, errorDetails, statusCode, errorCode)` for all error handling.
+- Never hardcode error codes; import them from `src/constants/error-code.constant.ts`.
