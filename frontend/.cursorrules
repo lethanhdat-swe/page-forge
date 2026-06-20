@@ -1,0 +1,38 @@
+{
+    "project_context": "PageForge - A lean MVP landing page builder utilizing drag-and-drop/click-to-edit mechanisms based on dynamic JSON configurations.",
+    "tech_stack": {
+        "framework": "Next.js 15+ (App Router)",
+        "styling": "Tailwind CSS",
+        "ui_library": "Shadcn UI",
+        "state_management": "Zustand"
+    },
+    "conventions": {
+        "naming_style": "PascalCase strictly enforced for all Component files, Component folders, and Store files (e.g., HeroAgency.tsx, CanvasPreview.tsx, PageStore.ts).",
+        "file_matching": "The main component file name inside a component directory MUST exactly match its parent folder name."
+    },
+    "architecture_rules": {
+        "routing": [
+            "Enforce Next.js Route Groups using parentheses to maintain clean, logical URL patterns without affecting production paths:",
+            "- src/app/(public)/: Public non-authenticated routes (e.g., Landing, Pricing).",
+            "- src/app/(auth)/: Authentication interfaces (e.g., Login, Register).",
+            "- src/app/(user)/: Authenticated end-user dashboard and editor tools (/dashboard, /editor).",
+            "- src/app/admin/: Standard folder layout to force system-wide administrative prefixes (/admin/dashboard).",
+            "- src/app/(subdomain)/[subdomain]/: Server-side routing layer that captures wildcard subdomains to render static JSON profiles."
+        ],
+        "component_hierarchy": [
+            "Enforce strict localized encapsulation for building section layouts (Blocks):",
+            "1. If a primary/parent Component contains children sub-components, a local 'components' folder MUST be created inside that parent directory.",
+            "2. Inside this local 'components' folder, each child component must reside within its own standalone sub-folder, with its index/executable file matching the sub-folder name exactly.",
+            "Enforced structure mapping example:",
+            "   src/components/blocks/HeroAgency/",
+            "   ├── HeroAgency.tsx (Parent Entrypoint Component)",
+            "   └── components/ (Local children repository)",
+            "       └── HeroCenter/",
+            "           └── HeroCenter.tsx (Child File)",
+            "3. Global Exception: If a modular element or sub-component is designed to be shared across multiple different macro-blocks, it MUST be positioned inside the root global folder 'src/components/' or 'src/components/ui/' (for Shadcn UI) rather than isolated internally."
+        ],
+        "state_management": [
+            "All macro operations affecting page rendering structure (Adding blocks, deleting elements, shifting index locations, modifying custom parameters, or global styling schemes) must be uniformly and exclusively driven by the global Zustand instance located at 'src/store/PageStore.ts'."
+        ]
+    }
+}
