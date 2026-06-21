@@ -1,0 +1,14 @@
+{
+  "type": "HeroAgencyBlock",
+  "settings": {
+    "layout": "split-image",
+    "paddingY": "py-20"
+  },
+  "data": {
+    "title": "Giải Pháp Số Thế Hệ Mới",
+    "subtitle": "Bứt phá doanh thu và định vị thương hiệu dẫn đầu.",
+    "ctaText": "Khám phá ngay",
+    "ctaLink": "/services",
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&q=80"
+  }
+}

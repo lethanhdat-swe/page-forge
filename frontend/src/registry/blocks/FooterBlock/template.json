@@ -1,0 +1,9 @@
+{
+  "type": "FooterBlock",
+  "settings": {
+    "layout": "minimal"
+  },
+  "data": {
+    "copyright": "© 2026 PageForge. All rights reserved."
+  }
+}

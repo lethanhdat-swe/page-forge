@@ -23,15 +23,15 @@ enum TokenType {
 }
 
 model User {
-  id         String   @id @default(uuid())
-  email      String   @unique
+  id         String    @id @default(uuid())
+  email      String    @unique
   password   String
   username   String
-  role       Role     @default(USER)
-  isVerified Boolean  @default(false) @map("is_verified")
-  createdAt  DateTime @default(now()) @map("created_at")
-  updatedAt  DateTime @updatedAt @map("updated_at")
-  pages      Page[]
+  role       Role      @default(USER)
+  isVerified Boolean   @default(false) @map("is_verified")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+  websites   Website[]
   tokens     Token[]
 
   @@map("users")
@@ -51,29 +51,6 @@ model Token {
   @@map("tokens")
 }
 
-model MasterBlock {
-  id        String         @id @default(uuid())
-  type      String         @unique
-  name      String
-  createdAt DateTime       @default(now()) @map("created_at")
-  layouts   MasterLayout[]
-
-  @@map("master_blocks")
-}
-
-model MasterLayout {
-  id            String      @id @default(uuid())
-  layoutName    String      @map("layout_name")
-  previewImage  String?     @map("preview_image")
-  defaultData   Json        @map("default_data")
-  defaultStyles Json        @map("default_styles")
-  blockId       String      @map("block_id")
-  block         MasterBlock @relation(fields: [blockId], references: [id], onDelete: Cascade)
-  createdAt     DateTime    @default(now()) @map("created_at")
-
-  @@map("master_layouts")
-}
-
 model Template {
   id           String   @id @default(uuid())
   name         String
@@ -87,16 +64,16 @@ model Template {
   @@map("templates")
 }
 
-model Page {
+model Website {
   id            String     @id @default(uuid())
   subdomainName String     @unique @map("subdomain_name")
   customDomain  String?    @unique @map("custom_domain")
-  jsonData      Json       @map("json_data")
   status        PageStatus @default(DRAFT)
   createdAt     DateTime   @default(now()) @map("created_at")
   updatedAt     DateTime   @updatedAt @map("updated_at")
   userId        String     @map("user_id")
   user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@map("pages")
+  @@index([userId])
+  @@map("websites")
 }

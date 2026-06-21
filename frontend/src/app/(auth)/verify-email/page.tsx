@@ -38,7 +38,11 @@ function VerifyContent() {
                         result.data.accessToken,
                         result.data.refreshToken
                     );
-                    router.push("/dashboard");
+                    const destination =
+                        result.data.user.role === "ADMIN"
+                            ? "/admin/dashboard"
+                            : "/dashboard";
+                    router.push(destination);
                 } else {
                     setStatus("error");
                     setErrorMessage(result.message || "Failed to verify account.");

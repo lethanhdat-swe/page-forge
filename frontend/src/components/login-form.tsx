@@ -42,7 +42,11 @@ export function LoginForm({
                         result.data.accessToken,
                         result.data.refreshToken,
                     );
-                router.push("/dashboard");
+                const destination =
+                    result.data.user.role === "ADMIN"
+                        ? "/admin/dashboard"
+                        : "/dashboard";
+                router.push(destination);
             } else {
                 setError(result.message || "Invalid credentials.");
             }

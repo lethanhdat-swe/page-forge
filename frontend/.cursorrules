@@ -47,6 +47,19 @@
             "2. Cookie Parameters Configuration: Authentication cookies must enforce active context binding flags (`path: '/'`), run environment validation checks (`secure: process.env.NODE_ENV === 'production'`), and execute cross-site forgery mitigation routines using standard lax rules (`sameSite: 'lax'`).",
             "3. Proactive Silent Refresh: Session persistence must rely on a client-side orchestrator (`SessionProvider.tsx`) running an active background ticker interval set to 10 minutes. If an active `access_token` cookie is present on boot, it immediately wakes up and executes a silent validation rotation towards `/auth/refresh`.",
             "4. Centralized Eviction Policy: When a refresh token expires or is rejected by the ExpressJS database, the client or server wrapper must instantly invalidate state, clear cookies, and push the active navigation layer to a standalone client-side cleanup page at `/logout` to completely flush local memories before redirecting to `/login`."
+        ],
+        "block_registry_and_polymorphism": [
+            "1. Strict Suffix Enforcement: All standalone component folders and their entrypoint files inside 'src/components/blocks/' MUST carry the 'Block' suffix (e.g., 'src/components/blocks/HeroAgencyBlock/HeroAgencyBlock.tsx').",
+            "2. Data-to-Layout Polymorphism: A single Block type can support multiple visual layouts. Each layout variant MUST have its data model explicitly typed. Combining dynamic variants into a generic catch-all type or using 'any' is strictly forbidden.",
+            "3. Main Entrypoint Routing: The main Block file (e.g., 'HeroAgencyBlock.tsx') must act strictly as a static layout router. It must use TypeScript Destructuring Discriminated Unions to safely narrow down the exact 'data' and 'settings' types before passing them down to child layout components.",
+            "4. Component File Allocation Mapping Example:",
+            "   src/components/blocks/HeroAgencyBlock/",
+            "   ├── HeroAgencyBlock.tsx (Main router entrypoint enforcing Discriminated Unions)",
+            "   └── components/ (Localized variant implementations)",
+            "       ├── HeroSplit/",
+            "       │   └── HeroSplit.tsx (Consumes localized HeroSplitData & HeroSplitSettings types)",
+            "       └── HeroCenter/",
+            "           └── HeroCenter.tsx (Consumes localized HeroCenterData & HeroCenterSettings types)"
         ]
     }
 }

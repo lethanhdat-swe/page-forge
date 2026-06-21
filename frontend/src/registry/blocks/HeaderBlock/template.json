@@ -1,0 +1,14 @@
+{
+  "type": "HeaderBlock",
+  "settings": {
+    "layout": "logo-left",
+    "sticky": true
+  },
+  "data": {
+    "logo": "PageForge",
+    "links": [
+      { "label": "Trang chủ", "url": "/" },
+      { "label": "Dịch vụ", "url": "/services" }
+    ]
+  }
+}

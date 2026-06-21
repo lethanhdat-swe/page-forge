@@ -1,0 +1,21 @@
+{
+  "type": "ServicesGridBlock",
+  "settings": {
+    "layout": "grid-3-columns"
+  },
+  "data": {
+    "heading": "Dịch vụ chiến lược",
+    "items": [
+      {
+        "id": "s1",
+        "title": "Phát triển Thương hiệu",
+        "description": "Định vị thương hiệu chuyên nghiệp."
+      },
+      {
+        "id": "s2",
+        "title": "Digital Marketing",
+        "description": "Tối ưu chiến dịch quảng cáo đa kênh."
+      }
+    ]
+  }
+}
