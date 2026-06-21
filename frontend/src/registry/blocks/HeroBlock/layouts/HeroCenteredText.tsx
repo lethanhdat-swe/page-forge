@@ -39,7 +39,8 @@ export function HeroCenteredText({
                     />
                     <div
                         style={{
-                            background: "radial-gradient(circle, transparent 40%, var(--background-color) 80%)",
+                            background:
+                                "radial-gradient(circle, transparent 40%, var(--background-color) 80%)",
                         }}
                         className="absolute inset-0"
                     />

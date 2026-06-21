@@ -3,20 +3,24 @@ import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 
 interface SubdomainLayoutProps {
-  children: ReactNode;
+    children: ReactNode;
 }
 
-export default async function SubdomainLayout({ children }: SubdomainLayoutProps) {
-  const headersList = await headers();
-  const host = headersList.get("host") || "";
-  const hostName = host.split(":")[0];
+export default async function SubdomainLayout({
+    children,
+}: SubdomainLayoutProps) {
+    const headersList = await headers();
+    const host = headersList.get("host") || "";
+    const hostName = host.split(":")[0];
 
-  const isBaseDomain =
-    hostName === "localhost" || hostName === "pageforge.com";
+    console.log(hostName);
 
-  if (isBaseDomain) {
-    notFound();
-  }
+    const isBaseDomain =
+        hostName === "localhost" || hostName === "pageforge.com";
 
-  return <>{children}</>;
+    if (isBaseDomain) {
+        notFound();
+    }
+
+    return <>{children}</>;
 }

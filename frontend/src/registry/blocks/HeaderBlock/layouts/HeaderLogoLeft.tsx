@@ -8,7 +8,7 @@ export interface HeaderLink {
     url: string;
 }
 
-export interface HeaderData {
+export interface HeaderLogoLeftData {
     logo: string;
     links: HeaderLink[];
 }
@@ -22,7 +22,7 @@ export function HeaderLogoLeft({
     data,
     settings,
 }: {
-    data: HeaderData;
+    data: HeaderLogoLeftData;
     settings: HeaderLogoLeftSettings;
 }) {
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -30,7 +30,9 @@ export function HeaderLogoLeft({
     return (
         <header
             style={{
-                backgroundColor: settings.sticky ? "transparent" : "var(--background-color)",
+                backgroundColor: settings.sticky
+                    ? "transparent"
+                    : "var(--background-color)",
                 color: "var(--text-color)",
             }}
             className={`${

@@ -1,18 +1,18 @@
 import { HeaderBlock } from "./blocks/HeaderBlock";
-import { HeroAgencyBlock } from "./blocks/HeroAgencyBlock";
-import { ServicesGridBlock } from "./blocks/ServicesGridBlock";
+import { HeroBlock } from "./blocks/HeroBlock";
+import { ServiceBlock } from "./blocks/ServiceBlock";
 import { FooterBlock } from "./blocks/FooterBlock";
 
 export const blockRegistry = {
     HeaderBlock,
-    HeroAgencyBlock,
-    ServicesGridBlock,
+    HeroBlock,
+    ServiceBlock,
     FooterBlock,
 } as const;
 
 export type BlockType = keyof typeof blockRegistry;
 
 export * from "./blocks/HeaderBlock";
-export * from "./blocks/HeroAgencyBlock";
-export * from "./blocks/ServicesGridBlock";
+export * from "./blocks/HeroBlock";
+export * from "./blocks/ServiceBlock";
 export * from "./blocks/FooterBlock";

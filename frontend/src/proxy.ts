@@ -171,7 +171,7 @@ export function proxy(request: NextRequest) {
 
     if (subdomain && subdomain !== "www") {
         return NextResponse.rewrite(
-            new URL(`/(subdomain)/${subdomain}${pathname}`, request.url),
+            new URL(`/${subdomain}${pathname}`, request.url),
         );
     }
 

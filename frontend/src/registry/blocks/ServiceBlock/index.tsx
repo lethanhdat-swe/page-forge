@@ -9,7 +9,7 @@ export type ServicesGridBlockProps = {
     data: ServicesGrid3ColumnsData;
 };
 
-export function ServicesGridBlock(props: ServicesGridBlockProps) {
+export function ServiceBlock(props: ServicesGridBlockProps) {
     switch (props.settings.layout) {
         case "grid-3-columns": {
             const { settings, data } = props;
