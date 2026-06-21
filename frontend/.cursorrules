@@ -7,8 +7,9 @@
         "state_management": "Zustand"
     },
     "conventions": {
-        "naming_style": "PascalCase strictly enforced for all Component files, Component folders, and Store files (e.g., HeroAgency.tsx, CanvasPreview.tsx, PageStore.ts).",
-        "file_matching": "The main component file name inside a component directory MUST exactly match its parent folder name."
+        "naming_style": "PascalCase strictly enforced for all Component files, Component folders, and Store files (e.g., HeroAgency.tsx, CanvasPreview.tsx, PageStore.ts, AuthStore.ts).",
+        "file_matching": "The main component file name inside a component directory MUST exactly match its parent folder name.",
+        "code_comments": "All code comments across the entire codebase MUST be written strictly in English."
     },
     "architecture_rules": {
         "routing": [
@@ -32,7 +33,20 @@
             "3. Global Exception: If a modular element or sub-component is designed to be shared across multiple different macro-blocks, it MUST be positioned inside the root global folder 'src/components/' or 'src/components/ui/' (for Shadcn UI) rather than isolated internally."
         ],
         "state_management": [
-            "All macro operations affecting page rendering structure (Adding blocks, deleting elements, shifting index locations, modifying custom parameters, or global styling schemes) must be uniformly and exclusively driven by the global Zustand instance located at 'src/store/PageStore.ts'."
+            "All macro operations affecting page rendering structure (Adding blocks, deleting elements, shifting index locations, modifying custom parameters, or global styling schemes) must be uniformly and exclusively driven by the global Zustand instance located at 'src/store/PageStore.ts'.",
+            "Authentication state, temporary memory tokens, and user credentials hydration must be handled exclusively by 'src/store/AuthStore.ts'."
+        ],
+        "api_communication": [
+            "1. Absolutely FORBIDDEN to use raw fetch or axios inside components or services. All remote backend interaction must go through the centralized HTTP core layers.",
+            "2. Client Components (`use client`) must pass requests through `httpClient` in `src/lib/http/client.ts`, which automatically queues and resolves token rotations using browser cookies via `js-cookie`.",
+            "3. Server Components/Actions must pass requests through `httpServer` in `src/lib/http/server.ts`, which safely isolates and resolves header manipulation through dynamic runtime imports (`await import('next/headers')`). Any standard 401 Unauthorized block must drop token cookies and execute a clean server redirect to `/logout`.",
+            "4. Domain Isolation: All executable network handlers must be mapped as structured functions inside specialized domain modules under `src/services/` (e.g., `auth.ts`, `page.ts`). UI components are only allowed to consume these pre-typed semantic services."
+        ],
+        "session_and_security": [
+            "1. Single Source of Truth for Session Retention: Both Access Token and Refresh Token must coexist inside Browser Cookies (`access_token` and `refresh_token`) to bridge both server and client layout runtimes.",
+            "2. Cookie Parameters Configuration: Authentication cookies must enforce active context binding flags (`path: '/'`), run environment validation checks (`secure: process.env.NODE_ENV === 'production'`), and execute cross-site forgery mitigation routines using standard lax rules (`sameSite: 'lax'`).",
+            "3. Proactive Silent Refresh: Session persistence must rely on a client-side orchestrator (`SessionProvider.tsx`) running an active background ticker interval set to 10 minutes. If an active `access_token` cookie is present on boot, it immediately wakes up and executes a silent validation rotation towards `/auth/refresh`.",
+            "4. Centralized Eviction Policy: When a refresh token expires or is rejected by the ExpressJS database, the client or server wrapper must instantly invalidate state, clear cookies, and push the active navigation layer to a standalone client-side cleanup page at `/logout` to completely flush local memories before redirecting to `/login`."
         ]
     }
 }
